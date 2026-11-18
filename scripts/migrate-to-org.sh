@@ -60,7 +60,7 @@ echo "    all nine clones present"
 echo "== 2. transfer repositories (history, stars, issues and redirects are preserved)"
 for r in "${SKILLS[@]}"; do
   echo "  $r"
-  run gh api -X POST "repos/ibrahimbdr/$r/transfer" -f "new_owner=$ORG"
+  run gh api -X POST "repos/Appit-labs/$r/transfer" -f "new_owner=$ORG"
 done
 
 echo "== 3. repoint local clones, docs and manifests to $ORG"
@@ -75,7 +75,7 @@ d, org = Path(sys.argv[1]), sys.argv[2]
 for name in ('README.md', 'SECURITY.md', 'NOTICE'):
     p = d / name
     if p.exists():
-        p.write_text(p.read_text().replace('ibrahimbdr/', f'{org}/'))
+        p.write_text(p.read_text().replace('Appit-labs/', f'{org}/'))
 pkg = d / 'package.json'
 if pkg.exists():
     data = json.loads(pkg.read_text())

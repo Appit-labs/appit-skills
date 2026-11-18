@@ -3,7 +3,7 @@
 # Single source of truth stays in the per-skill repositories.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-ORG="${ORG:-ibrahimbdr}"
+ORG="${ORG:-Appit-labs}"
 rm -rf skills && mkdir -p skills
 for repo in live-qa trello-tickets repo-runbook pg-inspect remote-exec cloud-browser ci-triage open-design blender-pipeline; do
   tmp=$(mktemp -d)

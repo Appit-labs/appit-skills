@@ -5,9 +5,9 @@ install command is verified wastes the one shot each community gives a project.
 
 Current state (verified 2026-11-18):
 
-- 9 skill repos + this marketplace are **public** under `ibrahimbdr`, with topics set.
-- `claude plugin marketplace add ibrahimbdr/appit-skills` → install → skill listed: **verified**.
-- `npx skills add ibrahimbdr/live-qa` → installs into `.claude/skills`, `.agents/skills`: **verified**.
+- 9 skill repos + this marketplace are **public** under `Appit-labs`, with topics set.
+- `claude plugin marketplace add Appit-labs/appit-skills` → install → skill listed: **verified**.
+- `npx skills add Appit-labs/live-qa` → installs into `.claude/skills`, `.agents/skills`: **verified**.
 - `npm pack` of this catalog builds a 488 KB tarball with all 9 skills: **verified**.
 - Blocked on you: the `appit-labs` org (web UI only), npm login (`npm publish`), a paid Claude plan
   for the Anthropic directory.
@@ -16,7 +16,7 @@ Current state (verified 2026-11-18):
 
 1. `npm org create appit-labs` (free) → `npm publish --access public` in this directory.
    That single step lists all nine skills in the pi package gallery.
-2. Ask three people who use agents to run `npx skills add ibrahimbdr/live-qa`. Each run feeds
+2. Ask three people who use agents to run `npx skills add Appit-labs/live-qa`. Each run feeds
    skills.sh's index.
 3. Get past **2 stars** on `live-qa` — that is SkillsMP's crawler floor. Post the *finding*, not the
    repo (see below), and the stars follow.
@@ -51,7 +51,7 @@ Two more things I learned doing this, both in the repo:
 - The token is worthless server-side unless the backend verifies with the matching test secret,
   which is the part everyone forgets.
 
-Repo (MIT, works in Claude Code / Codex / pi / Cursor): github.com/ibrahimbdr/live-qa
+Repo (MIT, works in Claude Code / Codex / pi / Cursor): github.com/Appit-labs/live-qa
 ```
 
 Then the honest footnote in comments: what it does not do (no solver, no bypass on sites you do not

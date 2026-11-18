@@ -2,9 +2,9 @@
 
 Checked 2026-11-18.
 
-> **Current state:** the org does not exist yet, so the repos are **public under `ibrahimbdr`** and
+> **Current state:** the org does not exist yet, so the repos are **public under `Appit-labs`** and
 > the catalog points there — everything in `LAUNCH.md` works today. When you create `appit-labs`,
-> run `scripts/migrate-to-org.sh --yes` and it transfers the repos, rewrites every `ibrahimbdr/`
+> run `scripts/migrate-to-org.sh --yes` and it transfers the repos, rewrites every `Appit-labs/`
 > reference (README, `plugin.json`, `package.json`, marketplace sources) and pushes.
 
 | Question | Answer |
@@ -12,7 +12,7 @@ Checked 2026-11-18.
 | Can an organisation be created for free? | **Yes.** GitHub Free for organizations costs $0: unlimited public and private repos, unlimited collaborators, 500 MB Actions storage, and **$12 of included compute usage per month** (Actions on private repos draws on that credit; Actions on public repos is free). |
 | Is the name `Appit` available? | **No.** `github.com/appit` is taken by a **user account**, and users + orgs share one namespace, so `Appit` cannot be registered as an org. Free alternatives, all verified available: **`appit-labs`**, `appit-hq`, `appit-labs`, `appitdev`. This repo assumes `appit-labs`. |
 | Does transferring keep history? | Yes: commits, issues, PRs, stars, watchers, forks and releases move with the repo. GitHub leaves a permanent redirect from the old URL. **Not transferred:** Actions secrets (re-add them), and personal forks of the repo are unlinked. |
-| What does it cost to move? | Nothing, and it is reversible (`gh api -X POST repos/ibrahimbdr/<repo>/transfer -f new_owner=ibrahimbdr`). |
+| What does it cost to move? | Nothing, and it is reversible (`gh api -X POST repos/Appit-labs/<repo>/transfer -f new_owner=Appit-labs`). |
 
 ## Do it in one command
 
@@ -40,7 +40,7 @@ gh auth refresh -h github.com -s admin:org
 ## 2. Push the central marketplace repo
 
 ```bash
-gh repo create ibrahimbdr/appit-skills --public --source=. \
+gh repo create Appit-labs/appit-skills --public --source=. \
   --remote=origin --push \
   --description "Agent skills marketplace: browser QA, tickets, databases, CI triage, Blender"
 ```
@@ -56,11 +56,11 @@ claude plugin validate .claude-plugin/marketplace.json --strict
 ```bash
 for r in live-qa ci-triage pg-inspect repo-runbook remote-exec trello-tickets \
          cloud-browser open-design blender-pipeline; do
-  gh api -X POST "repos/ibrahimbdr/$r/transfer" -f new_owner=appit-labs
+  gh api -X POST "repos/Appit-labs/$r/transfer" -f new_owner=appit-labs
 done
 ```
 
-Re-point your local clones afterwards (`git remote set-url origin git@github.com:ibrahimbdr/<repo>.git`);
+Re-point your local clones afterwards (`git remote set-url origin git@github.com:Appit-labs/<repo>.git`);
 old URLs keep redirecting, so nothing breaks immediately.
 
 ## 4. Make them discoverable
@@ -74,17 +74,17 @@ code, history and any secret ever committed become public at that moment.
 # run a secret scan over the full history first — this must come back empty
 # (gitleaks if you have it: `gitleaks detect --source <mirror> -v`)
 for r in live-qa ci-triage pg-inspect repo-runbook remote-exec trello-tickets cloud-browser open-design blender-pipeline; do
-  git clone -q --mirror "git@github.com:ibrahimbdr/$r.git" "/tmp/scan-$r" 2>/dev/null
+  git clone -q --mirror "git@github.com:Appit-labs/$r.git" "/tmp/scan-$r" 2>/dev/null
   hits=$(git -C "/tmp/scan-$r" log -p --all 2>/dev/null \
     | grep -acE '(bu_|sk-|ghp_|AKIA|xox[baprs]-)[A-Za-z0-9_\-]{12,}|-----BEGIN [A-Z ]*PRIVATE KEY')
   echo "$r: $hits suspicious match(es) in history"
 done
 
 # then, per repo
-gh repo edit ibrahimbdr/live-qa --visibility public --accept-visibility-change-consequences
+gh repo edit Appit-labs/live-qa --visibility public --accept-visibility-change-consequences
 
 # topics are how directory crawlers match you
-gh repo edit ibrahimbdr/live-qa \
+gh repo edit Appit-labs/live-qa \
   --add-topic agent-skill,agent-skills,claude-code-plugin,claude-skills,codex,pi-package,browser-testing,qa
 ```
 
@@ -107,7 +107,7 @@ Suggested topics per skill:
 | Registry | Route | Gate |
 | --- | --- | --- |
 | **npm → pi.dev/packages** | `npm org create appit-labs` (free for public packages), then `npm publish --access public` in `appit-skills/` with its `prepack` sync | `pi-package` keyword; the pi gallery indexes npm only, so git installs never appear |
-| **skills.sh** | no submission — indexed the first time anyone runs `npx skills add ibrahimbdr/live-qa` | public repo + valid `SKILL.md` |
+| **skills.sh** | no submission — indexed the first time anyone runs `npx skills add Appit-labs/live-qa` | public repo + valid `SKILL.md` |
 | **SkillsMP** | no submission — auto-crawls public GitHub | public repo, **≥ 2 stars**, quality filter |
 | **Claude Code marketplace** | self-hosted via this repo (`.claude-plugin/marketplace.json`) | none |
 | **Anthropic plugin directory** | submit at <https://claude.ai/directory/manage> from the repo | **paid Claude plan**, README ≥ 40 words, a license, and their security scan |

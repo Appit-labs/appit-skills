@@ -17,27 +17,27 @@ that reads the open Agent Skills format: **pi, Claude Code, Codex, Cursor, Gemin
 **Claude Code** — the whole collection as a marketplace:
 
 ```bash
-claude plugin marketplace add ibrahimbdr/appit-skills
+claude plugin marketplace add Appit-labs/appit-skills
 claude plugin install live-qa@appit-skills
 ```
 
 **pi** — one package, nine skills:
 
 ```bash
-pi install npm:@ibrahimbdr/skills
+pi install npm:@Appit-labs/skills
 ```
 
 **Codex / Cursor / anything else** — clone and copy the skill you want:
 
 ```bash
-git clone git@github.com:ibrahimbdr/live-qa.git
+git clone git@github.com:Appit-labs/live-qa.git
 cp -r live-qa/skills/live-qa ~/.codex/skills/          # or ~/.claude/skills/, or .cursor/skills/
 ```
 
 Verified end to end, not asserted:
 
 ```
-$ claude plugin marketplace add ibrahimbdr/appit-skills
+$ claude plugin marketplace add Appit-labs/appit-skills
 ✔ Successfully added marketplace: appit-skills
 $ claude plugin install live-qa@appit-skills
 ✔ Successfully installed plugin: live-qa@appit-skills
@@ -46,22 +46,22 @@ $ claude plugin details live-qa@appit-skills
 ```
 
 ```
-$ npx skills add ibrahimbdr/live-qa     # installs into .claude/skills, .agents/skills and agent/skills
+$ npx skills add Appit-labs/live-qa     # installs into .claude/skills, .agents/skills and agent/skills
 ```
 
 ## The skills
 
 | Skill | What it does | Needs |
 | --- | --- | --- |
-| [live-qa](https://github.com/ibrahimbdr/live-qa) | Live QA in a real browser: numbered screenshot per step, pass/fail table, console/network/a11y evidence, plus verified Turnstile/auth procedures | an `agent_browser`-style browser tool |
-| [ci-triage](https://github.com/ibrahimbdr/ci-triage) | "CI is red" → failing step + the extracted error, GitHub Actions and GitLab | `gh` and/or `glab` |
-| [pg-inspect](https://github.com/ibrahimbdr/pg-inspect) | Read-only Postgres inspection that is safe against production | `psql` |
-| [repo-runbook](https://github.com/ibrahimbdr/repo-runbook) | Writes the install/test/migrate runbook into `AGENTS.md` so sessions stop re-grepping for it | Python 3.9+ |
-| [remote-exec](https://github.com/ibrahimbdr/remote-exec) | SSH that cannot hang: aliased hosts, hard timeouts, one-call host probe | `ssh` + key auth |
-| [trello-tickets](https://github.com/ibrahimbdr/trello-tickets) | Seven ticket types with sections, checklist, labels, cover — read and create | Trello API key |
-| [cloud-browser](https://github.com/ibrahimbdr/cloud-browser) | Hosted/stealth browser sessions **and** the sweep that stops them billing | provider key |
-| [open-design](https://github.com/ibrahimbdr/open-design) | OpenDesign monorepo: pinned pnpm, `tools-dev` lifecycle, QA, pre-PR checks | Node 24 + pnpm 10.33.2 |
-| [blender-pipeline](https://github.com/ibrahimbdr/blender-pipeline) | Blockout → shade → light → export via MCP, eight playbooks behind one router | Blender + MCP add-on |
+| [live-qa](https://github.com/Appit-labs/live-qa) | Live QA in a real browser: numbered screenshot per step, pass/fail table, console/network/a11y evidence, plus verified Turnstile/auth procedures | an `agent_browser`-style browser tool |
+| [ci-triage](https://github.com/Appit-labs/ci-triage) | "CI is red" → failing step + the extracted error, GitHub Actions and GitLab | `gh` and/or `glab` |
+| [pg-inspect](https://github.com/Appit-labs/pg-inspect) | Read-only Postgres inspection that is safe against production | `psql` |
+| [repo-runbook](https://github.com/Appit-labs/repo-runbook) | Writes the install/test/migrate runbook into `AGENTS.md` so sessions stop re-grepping for it | Python 3.9+ |
+| [remote-exec](https://github.com/Appit-labs/remote-exec) | SSH that cannot hang: aliased hosts, hard timeouts, one-call host probe | `ssh` + key auth |
+| [trello-tickets](https://github.com/Appit-labs/trello-tickets) | Seven ticket types with sections, checklist, labels, cover — read and create | Trello API key |
+| [cloud-browser](https://github.com/Appit-labs/cloud-browser) | Hosted/stealth browser sessions **and** the sweep that stops them billing | provider key |
+| [open-design](https://github.com/Appit-labs/open-design) | OpenDesign monorepo: pinned pnpm, `tools-dev` lifecycle, QA, pre-PR checks | Node 24 + pnpm 10.33.2 |
+| [blender-pipeline](https://github.com/Appit-labs/blender-pipeline) | Blockout → shade → light → export via MCP, eight playbooks behind one router | Blender + MCP add-on |
 
 ## Why these
 
@@ -90,5 +90,17 @@ collection costs about 830 tokens of session overhead in total.
 
 ## License
 
-MIT. `blender-pipeline` bundles the Blender Skills playbooks by
-[arjun988](https://github.com/arjun988/blender-skills) (MIT) — see its `NOTICE`.
+**MIT**, copyright Appit Labs. Chosen deliberately: it is the licence the Agent Skills
+ecosystem defaults to, it puts no friction on internal use inside a company, and it is
+compatible with the MIT playbooks bundled in `blender-pipeline`.
+
+| Concern | Why MIT is enough here |
+| --- | --- |
+| Adoption | one file to read, no notice obligations beyond keeping the copyright line |
+| Company use | no "network" or "field of use" restriction to clear with legal |
+| Derivative skills | anyone can fork a skill, tune it to their stack, keep it private |
+| Patents | no express grant (Apache-2.0 has one); acceptable for instruction + small scripts, revisit if we ever ship a patentable runtime |
+
+`blender-pipeline` redistributes the [Blender Skills](https://github.com/arjun988/blender-skills)
+playbooks by arjun988 under their MIT terms — see its `NOTICE`. If a future skill bundles
+Apache-2.0 code, that skill will carry its own `NOTICE` and say so in its README.
