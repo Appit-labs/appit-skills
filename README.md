@@ -56,17 +56,17 @@ $ npx skills add Appit-labs/live-qa     # installs into .claude/skills, .agents/
 
 ## The skills
 
-| Skill | What it does | Needs |
+| Skill | What it is, in one line | It removes |
 | --- | --- | --- |
-| [live-qa](https://github.com/Appit-labs/live-qa) | Live QA in a real browser: numbered screenshot per step, pass/fail table, console/network/a11y evidence, plus verified Turnstile/auth procedures | an `agent_browser`-style browser tool |
-| [ci-triage](https://github.com/Appit-labs/ci-triage) | "CI is red" → failing step + the extracted error, GitHub Actions and GitLab | `gh` and/or `glab` |
-| [pg-inspect](https://github.com/Appit-labs/pg-inspect) | Read-only Postgres inspection that is safe against production | `psql` |
-| [repo-runbook](https://github.com/Appit-labs/repo-runbook) | Writes the install/test/migrate runbook into `AGENTS.md` so sessions stop re-grepping for it | Python 3.9+ |
-| [remote-exec](https://github.com/Appit-labs/remote-exec) | SSH that cannot hang: aliased hosts, hard timeouts, one-call host probe | `ssh` + key auth |
-| [trello-tickets](https://github.com/Appit-labs/trello-tickets) | Seven ticket types with sections, checklist, labels, cover — read and create | Trello API key |
-| [cloud-browser](https://github.com/Appit-labs/cloud-browser) | Hosted/stealth browser sessions **and** the sweep that stops them billing | provider key |
-| [open-design](https://github.com/Appit-labs/open-design) | OpenDesign monorepo: pinned pnpm, `tools-dev` lifecycle, QA, pre-PR checks | Node 24 + pnpm 10.33.2 |
-| [blender-pipeline](https://github.com/Appit-labs/blender-pipeline) | Blockout → shade → light → export via MCP, eight playbooks behind one router | Blender + MCP add-on |
+| [live-qa](https://github.com/Appit-labs/live-qa) | Live QA in a real browser: a numbered screenshot per step, a pass/fail table, console/network facts | "looks good" with no evidence |
+| [ci-triage](https://github.com/Appit-labs/ci-triage) | Red CI → the failing step and the four lines that matter (GitHub Actions + GitLab) | reading 10k lines to find one error |
+| [pg-inspect](https://github.com/Appit-labs/pg-inspect) | Read-only Postgres inspection: tables, schema, SELECT, EXPLAIN, migrations, locks | retyping `psql` with credentials, one typo from a write |
+| [repo-runbook](https://github.com/Appit-labs/repo-runbook) | Writes the install/test/migrate runbook into `AGENTS.md`, and keeps it honest | forty tool calls re-discovering how to run the tests |
+| [remote-exec](https://github.com/Appit-labs/remote-exec) | One-shot SSH with hard timeouts, host aliases and a single-call health probe | sessions hanging on a password prompt |
+| [trello-tickets](https://github.com/Appit-labs/trello-tickets) | Seven ticket types baked in: sections, checklist, labels, cover colour | half-filled cards and a template to copy by hand |
+| [cloud-browser](https://github.com/Appit-labs/cloud-browser) | Hosted browser sessions, plus the sweep that stops orphaned ones | a browser still billing after a crashed run |
+| [open-design](https://github.com/Appit-labs/open-design) | The OpenDesign monorepo: pinned pnpm, `tools-dev` lifecycle, QA, pre-PR checks | the corepack/pnpm hour |
+| [blender-pipeline](https://github.com/Appit-labs/blender-pipeline) | Blender via MCP: eight playbooks behind one router | loading eight skills to model one prop |
 
 ## Why these
 
