@@ -1,0 +1,36 @@
+{
+  "skill": "live-qa",
+  "out": "live-qa/demo.gif",
+  "caption": "live-qa \u2014 a real browser, driven from a shell",
+  "steps": [
+    {
+      "cmd": "drive.mjs start https://stage.example.com",
+      "phase": "start",
+      "out": [
+        "{\"url\":\"\u2026/login\",\"title\":\"Talentino\"}"
+      ]
+    },
+    {
+      "cmd": "drive.mjs links",
+      "phase": "look",
+      "out": [
+        "input:username",
+        "input:password",
+        "input:Login",
+        "link:Signup now"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "path": "live-qa/step-1-login.png",
+      "caption": "live-qa \u2014 staging login (a real screenshot, not a mockup)",
+      "phase": "shot 01"
+    },
+    {
+      "path": "live-qa/step-2-form.png",
+      "caption": "live-qa \u2014 production form: captcha state read, no solver",
+      "phase": "eval + shot"
+    }
+  ]
+}

@@ -87,6 +87,18 @@ def build(spec: dict) -> Path:
         if step.get("pause_lines"):
             lines.extend(step["pause_lines"])
         lines.append("")
+    for extra in spec.get("images") or []:
+        shot = Image.open(ROOT / "assets" / extra["path"]).convert("RGB")
+        shot = shot.resize((W, int(W * shot.height / shot.width)))
+        canvas = Image.new("RGB", (W, 34 + shot.height), CHROME)
+        canvas.paste(shot, (0, 34))
+        d = ImageDraw.Draw(canvas)
+        for i, c in enumerate([(255, 95, 86), (255, 189, 46), (39, 201, 63)]):
+            d.ellipse([16 + i * 20, 11, 28 + i * 20, 23], fill=c)
+        d.text((96, 9), extra.get("caption", caption), font=font(13, False), fill=DIM)
+        d.text((W - 12 - d.textlength(extra.get("phase", ""), font=font(15)), 9),
+               extra.get("phase", ""), font=font(15), fill=ACCENT)
+        frames += [canvas, canvas, canvas]
     if spec.get("image"):
         # A real screenshot as the payoff frame, captioned.
         shot = Image.open(ROOT / "assets" / spec["image"]).convert("RGB")
