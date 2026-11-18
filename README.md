@@ -119,3 +119,8 @@ compatible with the MIT playbooks bundled in `blender-pipeline`.
 `blender-pipeline` redistributes the [Blender Skills](https://github.com/arjun988/blender-skills)
 playbooks by arjun988 under their MIT terms — see its `NOTICE`. If a future skill bundles
 Apache-2.0 code, that skill will carry its own `NOTICE` and say so in its README.
+
+## Write-ups
+
+- **Your Cloudflare Turnstile may never be issuing a token** — [dev.to](https://dev.to/ibrahimbdr/your-cloudflare-turnstile-may-never-be-issuing-a-token-here-is-the-one-liner-that-tells-you-4h75) ·
+  [discussion](https://github.com/Appit-labs/appit-skills/discussions/1)
