@@ -1,0 +1,138 @@
+{
+  "name": "appit-skills",
+  "owner": {
+    "name": "Appit Labs",
+    "url": "https://github.com/appit-labs"
+  },
+  "description": "Practical agent skills for real engineering work: browser QA, tickets, databases, remote boxes, CI triage, Blender.",
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "name": "live-qa",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/live-qa"
+      },
+      "description": "Step-by-step live QA in a real browser: numbered screenshot per step, pass/fail table, console/network/a11y evidence.",
+      "category": "engineering",
+      "tags": [
+        "testing",
+        "browser",
+        "qa",
+        "playwright"
+      ]
+    },
+    {
+      "name": "trello-tickets",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/trello-tickets"
+      },
+      "description": "Create and read Trello cards from seven baked-in ticket types with sections, checklist, labels and cover color.",
+      "category": "engineering",
+      "tags": [
+        "trello",
+        "project-management",
+        "tickets"
+      ]
+    },
+    {
+      "name": "repo-runbook",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/repo-runbook"
+      },
+      "description": "Generate and keep a short verified runbook (install/run/test/migrate) in AGENTS.md so later sessions stop re-discovering it.",
+      "category": "engineering",
+      "tags": [
+        "onboarding",
+        "agents-md",
+        "monorepo"
+      ]
+    },
+    {
+      "name": "pg-inspect",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/pg-inspect"
+      },
+      "description": "Read-only Postgres inspection: tables, schema, SELECT, EXPLAIN, migrations, locks, sizes \u2014 safe against production.",
+      "category": "engineering",
+      "tags": [
+        "postgres",
+        "database",
+        "sql"
+      ]
+    },
+    {
+      "name": "remote-exec",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/remote-exec"
+      },
+      "description": "One-shot SSH for agents: aliased hosts, hard timeouts, no password-prompt hangs, single-call host probe.",
+      "category": "engineering",
+      "tags": [
+        "ssh",
+        "devops",
+        "remote"
+      ]
+    },
+    {
+      "name": "cloud-browser",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/cloud-browser"
+      },
+      "description": "Hosted/stealth cloud browser sessions through agent-browser providers, plus the sweep that stops orphaned browsers.",
+      "category": "engineering",
+      "tags": [
+        "browser",
+        "cloud",
+        "billing-safety"
+      ]
+    },
+    {
+      "name": "ci-triage",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/ci-triage"
+      },
+      "description": "One command from \"CI is red\" to the failing step and the extracted error, for GitHub Actions and GitLab CI.",
+      "category": "engineering",
+      "tags": [
+        "ci",
+        "github-actions",
+        "gitlab"
+      ]
+    },
+    {
+      "name": "open-design",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/open-design"
+      },
+      "description": "Work in the OpenDesign monorepo: pinned pnpm, tools-dev lifecycle, desktop/browser QA, pre-PR checks.",
+      "category": "engineering",
+      "tags": [
+        "open-design",
+        "pnpm",
+        "design"
+      ]
+    },
+    {
+      "name": "blender-pipeline",
+      "source": {
+        "source": "github",
+        "repo": "ibrahimbdr/blender-pipeline"
+      },
+      "description": "Blockout to shade to light to export in Blender via MCP, with eight specialist playbooks behind one router.",
+      "category": "engineering",
+      "tags": [
+        "blender",
+        "3d",
+        "mcp"
+      ]
+    }
+  ]
+}

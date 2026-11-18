@@ -1,0 +1,33 @@
+{
+  "name": "appit-skills",
+  "version": "0.1.0",
+  "description": "Practical agent skills for real engineering work: browser QA, tickets, databases, remote boxes, CI triage, Blender.",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "agent-skills",
+    "claude-code-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibrahimbdr/appit-skills.git"
+  },
+  "pi": {
+    "skills": [
+      "./skills"
+    ]
+  },
+  "files": [
+    "skills",
+    "demos",
+    "tools",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "prepack": "bash scripts/sync-skills.sh",
+    "demo": "python3 scripts/make_demo.py"
+  }
+}
