@@ -133,6 +133,54 @@
         "3d",
         "mcp"
       ]
+    },
+    {
+      "name": "code-scan",
+      "description": "Skylos (Python) + Fallow (TS/JS) as one prioritised report, with a baseline gate so CI fails only on new findings.",
+      "category": "engineering",
+      "tags": [
+        "skylos",
+        "fallow",
+        "dead-code",
+        "sast",
+        "ci"
+      ],
+      "source": {
+        "source": "github",
+        "repo": "Appit-labs/code-scan"
+      }
+    },
+    {
+      "name": "release",
+      "description": "Conventional commits \u2192 SemVer, changelog, release PR/MR, tag and release, on GitHub or GitLab.",
+      "category": "engineering",
+      "tags": [
+        "release",
+        "semver",
+        "changelog",
+        "github",
+        "gitlab"
+      ],
+      "source": {
+        "source": "github",
+        "repo": "Appit-labs/release"
+      }
+    },
+    {
+      "name": "hermes-setup",
+      "description": "Install and link a Hermes agent securely: short-lived JWT, least-privilege DB role, 0600 env, three-assertion link check.",
+      "category": "engineering",
+      "tags": [
+        "hermes",
+        "agent",
+        "jwt",
+        "security",
+        "postgres"
+      ],
+      "source": {
+        "source": "github",
+        "repo": "Appit-labs/hermes-setup"
+      }
     }
   ]
 }

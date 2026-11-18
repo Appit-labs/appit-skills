@@ -5,7 +5,7 @@
 # Appit skills
 
 Practical agent skills for real engineering work — browser QA, tickets, databases, remote boxes,
-CI triage, Blender. One marketplace, nine skills, no runtime dependencies.
+CI triage, Blender. One marketplace, twelve skills, no runtime dependencies.
 
 > **This repository contains no skill code.** It is the catalog: one `marketplace.json` that points at
 > the nine skill repositories, so a single `claude plugin marketplace add` makes all of them
@@ -26,7 +26,7 @@ claude plugin marketplace add Appit-labs/appit-skills
 claude plugin install live-qa@appit-skills
 ```
 
-**pi** — one package, nine skills:
+**pi** — one package, twelve skills:
 
 ```bash
 pi install npm:@Appit-labs/skills
@@ -67,6 +67,9 @@ $ npx skills add Appit-labs/live-qa     # installs into .claude/skills, .agents/
 | [cloud-browser](https://github.com/Appit-labs/cloud-browser) | Hosted browser sessions, plus the sweep that stops orphaned ones | a browser still billing after a crashed run |
 | [open-design](https://github.com/Appit-labs/open-design) | The OpenDesign monorepo: pinned pnpm, `tools-dev` lifecycle, QA, pre-PR checks | the corepack/pnpm hour |
 | [blender-pipeline](https://github.com/Appit-labs/blender-pipeline) | Blender via MCP: eight playbooks behind one router | loading eight skills to model one prop |
+| [code-scan](https://github.com/Appit-labs/code-scan) | Skylos + Fallow as one prioritised report, with a repository baseline gate | two scanners, two severity scales, and a gate nobody can switch on |
+| [release](https://github.com/Appit-labs/release) | Conventional commits → SemVer, changelog, release PR/MR, tag, release (GitHub or GitLab) | hand-edited changelogs and version numbers that drift |
+| [hermes-setup](https://github.com/Appit-labs/hermes-setup) | Short-lived JWT, least-privilege DB role, 0600 env, three-assertion link check for a Hermes agent | agent tokens that never expire and DB users with too much power |
 
 ## Why these
 
