@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Appit" src="assets/appit-logo.png" width="360">
+  <img alt="Appit" src="assets/appit-logo.png" width="320">
 </p>
 
 # Appit skills
