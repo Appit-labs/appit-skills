@@ -9,11 +9,11 @@
 #   1. The org exists: https://github.com/organizations/new  ->  Free  ->  appit-labs
 #   2. You are an owner of it, and this token can act on the org:
 #        gh auth refresh -h github.com -s admin:org
-#   3. Local clones of the skills live in $SRC (default: /home/ibadr/work/skills-ship)
+#   3. Local clones of the skills live in $SRC (default: $HOME/work/skills-ship)
 set -euo pipefail
 
 ORG="${ORG:-appit-labs}"
-SRC="${SRC:-/home/ibadr/work/skills-ship}"
+SRC="${SRC:-$HOME/work/skills-ship}"
 CENTRAL="$(cd "$(dirname "$0")/.." && pwd)"
 SKILLS=(live-qa ci-triage pg-inspect repo-runbook remote-exec trello-tickets cloud-browser open-design blender-pipeline)
 

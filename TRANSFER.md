@@ -40,7 +40,7 @@ gh auth refresh -h github.com -s admin:org
 ## 2. Push the central marketplace repo
 
 ```bash
-gh repo create ibrahimbdr/appit-skills --private --source=/home/ibadr/work/appit-skills \
+gh repo create ibrahimbdr/appit-skills --public --source=. \
   --remote=origin --push \
   --description "Agent skills marketplace: browser QA, tickets, databases, CI triage, Blender"
 ```
@@ -48,7 +48,7 @@ gh repo create ibrahimbdr/appit-skills --private --source=/home/ibadr/work/appit
 Validate the catalog before anyone else does (this is the same check users hit):
 
 ```bash
-claude plugin validate /home/ibadr/work/appit-skills/.claude-plugin/marketplace.json --strict
+claude plugin validate .claude-plugin/marketplace.json --strict
 ```
 
 ## 3. Transfer the nine repos
