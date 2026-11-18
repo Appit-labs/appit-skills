@@ -7,10 +7,15 @@
 Practical agent skills for real engineering work — browser QA, tickets, databases, remote boxes,
 CI triage, Blender. One marketplace, nine skills, no runtime dependencies.
 
+> **This repository contains no skill code.** It is the catalog: one `marketplace.json` that points at
+> the nine skill repositories, so a single `claude plugin marketplace add` makes all of them
+> installable. The skill code, its README, its demo and its licence live in each skill's own repo
+> (listed below), which is also where issues and pull requests belong.
+
 Every skill is plain `SKILL.md` plus (where useful) a single stdlib script, so it works in any agent
 that reads the open Agent Skills format: **pi, Claude Code, Codex, Cursor, Gemini CLI, Copilot, Goose**.
 
-![live-qa driving a real browser](assets/live-qa-demo.gif)
+![live-qa driving a real browser](assets/hero-live-qa.gif)
 
 ## Install
 

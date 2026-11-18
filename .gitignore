@@ -1,3 +1,5 @@
 node_modules/
 skills/
 *.tgz
+__pycache__/
+*.pyc
