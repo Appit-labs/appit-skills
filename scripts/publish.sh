@@ -23,6 +23,16 @@ say "== preflight"
 NPMRC=""
 cleanup() { [ -n "$NPMRC" ] && rm -f "$NPMRC"; }
 trap cleanup EXIT
+
+# A dedicated npm config wins over the login session in ~/.npmrc: it can hold an
+# automation token (no OTP prompt) without touching the account's interactive session.
+APPNPMRC="${APPNPMRC:-$HOME/.config/appit/npmrc}"
+if [ -z "${NPM_TOKEN:-}" ] && [ -f "$APPNPMRC" ]; then
+  MODE=$(stat -c '%a' "$APPNPMRC" 2>/dev/null || stat -f '%Lp' "$APPNPMRC")
+  [ "$MODE" = "600" ] || fail "$APPNPMRC is mode $MODE — chmod 600 it (it holds a credential)"
+  export NPM_CONFIG_USERCONFIG="$APPNPMRC"
+  say "  auth:       $APPNPMRC (automation token, mode 600)"
+fi
 if [ -n "${NPM_TOKEN:-}" ]; then
   # Token path: no browser, no bot check. Written 0600 and deleted on exit.
   NPMRC=$(mktemp)
