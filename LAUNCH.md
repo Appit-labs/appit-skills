@@ -31,6 +31,30 @@ either.
 
 ### 3. Publish the post people will actually read
 
+**Already live, no account needed:** the finding is published as a Discussion on the catalog —
+https://github.com/Appit-labs/appit-skills/discussions/1 — so there is a canonical, indexable URL to
+link from anywhere. Discussions were enabled for this.
+
+**One click from a real article:** dev.to has a publishing API, so the post can go out with a command
+instead of a browser:
+
+```bash
+# 1. dev.to → Settings → Extensions → DEV Community API Keys → copy the key
+DEVTO_API_KEY=xxx launch/post-to-devto.sh launch/turnstile-post.md
+DEVTO_API_KEY=xxx launch/post-to-devto.sh --dry-run launch/turnstile-post.md   # preview the payload
+```
+
+Same command publishes post 2 in a fortnight (`launch/crawls-post.md`). The endpoint is verified
+(`POST /api/articles` → 401 without a key, i.e. URL and method are right), and the body cleanup strips
+the launch-file scaffolding so only the article is published.
+
+**Why not Hacker News / Reddit automatically:** neither has an API for submissions, both need a
+logged-in browser session (there is none in your Chrome profile — 29 cookie hosts, none of them
+`news.ycombinator.com`, `reddit.com`, `x.com`, `linkedin.com` or `dev.to`), and HN's guidelines treat
+bot submissions as abuse while many subreddits auto-remove posts from low-karma accounts. dev.to is
+the one channel where automation is both possible and welcome; HN is worth doing manually afterwards
+with the Discussion URL as the link.
+
 Not "12 skills". One finding:
 
 > **Your Cloudflare Turnstile may never be issuing a token — here is the one-liner that tells you**
