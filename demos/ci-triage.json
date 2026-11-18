@@ -1,0 +1,18 @@
+{
+  "skill": "ci-triage",
+  "out": "ci-triage/demo.gif",
+  "caption": "ci-triage \u2014 10k-line log to 4 lines",
+  "steps": [
+    {
+      "cmd": "ci.py failing",
+      "phase": "payoff",
+      "out": [
+        "repo TalentinoAI/talentino-app branch development via github",
+        "run 34358780023 .github/workflows/docs.yml \u2014 failure",
+        "https://github.com/TalentinoAI/talentino-app/actions/runs/34358780023",
+        "this run has no jobs: it failed before any step started, which is almost always a workflow file problem (bad YAML, unknown action, or a bad expression).",
+        "next: gh run view 34358780023 --repo TalentinoAI/talentino-app --log-failed   # or check annotations in the UI"
+      ]
+    }
+  ]
+}

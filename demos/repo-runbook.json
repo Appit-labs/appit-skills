@@ -1,0 +1,27 @@
+{
+  "skill": "repo-runbook",
+  "out": "repo-runbook/demo.gif",
+  "caption": "repo-runbook \u2014 stop re-grepping for the test command",
+  "steps": [
+    {
+      "cmd": "runbook.py scan",
+      "phase": "scan",
+      "out": [
+        "<!-- runbook:start -->",
+        "### Runbook: rbtest",
+        "",
+        "- **Install:** `uv sync`",
+        "- **Test:** `uv run pytest -q`",
+        "- **Make targets:** `coverage`, `down`, `format`, `install`, `lint`, `migrate`, `run`, `test`, `up`, `validate`, `worker`"
+      ]
+    },
+    {
+      "cmd": "runbook.py write && runbook.py check",
+      "phase": "payoff",
+      "out": [
+        "updated /tmp/rbtest/AGENTS.md (10 lines)",
+        "runbook current"
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ibrahimbdr/appit-skills.git"
+    "url": "git+https://github.com/ibrahimbdr/appit-skills.git"
   },
   "pi": {
     "skills": [
@@ -19,10 +19,15 @@
   },
   "files": [
     "skills",
+    "demos",
+    "tools",
+    "assets",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md"
   ],
   "scripts": {
-    "prepack": "bash scripts/sync-skills.sh"
+    "prepack": "bash scripts/sync-skills.sh",
+    "demo": "python3 scripts/make_demo.py"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "skill": "remote-exec",
+  "out": "remote-exec/demo.gif",
+  "caption": "remote-exec \u2014 an SSH call that cannot hang",
+  "steps": [
+    {
+      "cmd": "rx.py probe tal-stage",
+      "phase": "payoff",
+      "out": [
+        "== host",
+        "innoads",
+        "09:17:53 up 700 days, 20:25,  0 users,  load average: 0.08, 0.08, 0.08",
+        "== disk",
+        "Mounted on          Size  Used Use%",
+        "== mem",
+        "              total        used        free      shared  buff/cache   available",
+        "Mem:           31Gi        18Gi       935Mi       633Mi        12Gi        12Gi",
+        "== docker",
+        "talentino-speech-staging\tUp 7 days (healthy)"
+      ]
+    }
+  ]
+}

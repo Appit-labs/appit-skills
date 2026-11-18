@@ -1,3 +1,7 @@
+<p align="center">
+  <img alt="Appit" src="assets/appit-logo.png" width="360">
+</p>
+
 # Appit skills
 
 Practical agent skills for real engineering work — browser QA, tickets, databases, remote boxes,

@@ -1,0 +1,34 @@
+{
+  "skill": "pg-inspect",
+  "out": "pg-inspect/demo.gif",
+  "caption": "pg-inspect \u2014 read-only by construction",
+  "steps": [
+    {
+      "cmd": "pg.py tables",
+      "phase": "install",
+      "out": [
+        "# tables in public",
+        "table | approx_rows | size",
+        "email_templates | 2409 | 3032 kB",
+        "dropdown_option_items | 9206 | 2600 kB"
+      ]
+    },
+    {
+      "cmd": "pg.py schema users",
+      "phase": "run",
+      "out": [
+        "# schema public.users",
+        "column_name | data_type | is_nullable | default",
+        "id | text | NO |",
+        "username | character varying | NO |"
+      ]
+    },
+    {
+      "cmd": "pg.py q \"delete from users\"",
+      "phase": "payoff",
+      "out": [
+        "/bin/sh: 1: /home/ibadr/.pi/agent/skills/pg-inspect/scripts/pg.py: Permission denied"
+      ]
+    }
+  ]
+}
