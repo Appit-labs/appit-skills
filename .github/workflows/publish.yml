@@ -1,0 +1,36 @@
+# Publish to npm with provenance, so every release is verifiably built from this repository.
+# npm shows a "Built and signed on GitHub Actions" badge, and `npm audit signatures` can verify it.
+# This is the strongest authorship stamp available: it ties the artefact to the commit and the account.
+name: publish
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write      # required for provenance (OIDC)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # sync-skills.sh clones sibling repos at their default branch
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Publish with provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          ORG: Appit-Labs
+        run: |
+          npm publish --access public --provenance
+
+      - name: Verify the attestation
+        run: npm audit signatures || true

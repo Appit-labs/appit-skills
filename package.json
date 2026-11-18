@@ -31,11 +31,12 @@
     "demo": "python3 scripts/make_demo.py"
   },
   "author": {
-    "name": "Appit Labs",
-    "url": "https://github.com/Appit-labs"
+    "name": "Ibrahim M. Badr",
+    "url": "https://github.com/ibrahimbdr"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "homepage": "https://github.com/Appit-labs/appit-skills#readme",
   "bugs": {
@@ -43,5 +44,11 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Appit Labs",
+      "url": "https://github.com/Appit-Labs"
+    }
+  ]
 }
