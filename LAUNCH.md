@@ -12,7 +12,8 @@ State on 2026-11-18 (verified, not assumed):
 | pi gallery | live: [pi.dev/packages/@appitlabs/skills](https://pi.dev/packages/@appitlabs/skills) |
 | Org avatar | **live** — full Appit wordmark, 512², 99.8% pixel match to the committed file |
 | npm download counter | [`api.npmjs.org/downloads/point`](https://api.npmjs.org/downloads/point/last-week/@appitlabs/skills) — empty until npm's daily rollup picks the package up (≤24 h) |
-| Blocked on you | the first post, the Anthropic directory (paid plan), and consent for the awesome-list PR |
+| **Post 1** | **published** — [dev.to article](https://dev.to/ibrahimbdr/your-cloudflare-turnstile-may-never-be-issuing-a-token-here-is-the-one-liner-that-tells-you-4h75) + [GitHub Discussion #1](https://github.com/Appit-labs/appit-skills/discussions/1), cross-linked |
+| Blocked on you | the Anthropic directory (paid plan); the awesome-list PR is deliberately deferred until there is social proof |
 
 ## Remaining steps, in order
 
@@ -69,7 +70,19 @@ earns stars; the repo is what people find afterwards.
 Week 3 post, for engineers: **"16,315 `cd && grep` calls: what an agent wastes re-learning your repo"**
 — the measured origin of `repo-runbook`, `pg-inspect` and `remote-exec`.
 
-### 4. Listings that need a human
+### 4. After the post: cross-links and the second one
+
+Published and cross-linked already:
+
+- dev.to article — tags `webdev`, `security`, `cloudflare`, `testing`
+- GitHub Discussion #1 with a comment pointing at the article
+- catalog `README` "Write-ups" section and the `live-qa` README both link it
+
+Two weeks of readers, then `launch/crawls-post.md` through the same command
+(`DEVTO_API_KEY=… launch/post-to-devto.sh launch/crawls-post.md`). Use `canonical_url` if you
+cross-post it to another publication, so the two do not compete in search.
+
+### 5. Listings that need a human
 
 | Where | Requirement | Effort |
 | --- | --- | --- |
@@ -77,7 +90,7 @@ Week 3 post, for engineers: **"16,315 `cd && grep` calls: what an agent wastes r
 | [awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | one README line, one PR — 1,600 open PRs, and they now ask for social proof, so file after the first post | 10 min |
 | Org avatar | `Appit-labs/.github/profile/assets/appit-avatar.png` → Settings → Profile | 1 min |
 
-### 5. What to do *not* do
+### 6. What to do *not* do
 
 - Do not post twelve repos in one go. Nine-at-once reads as spam; one sharp finding reads as expertise.
 - Do not claim numbers you have not run. Every figure in these READMEs came from a session log or a
