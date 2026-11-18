@@ -60,7 +60,7 @@ $ npx skills add Appit-labs/live-qa     # installs into .claude/skills, .agents/
 | --- | --- | --- |
 | [live-qa](https://github.com/Appit-labs/live-qa) | Live QA in a real browser: a numbered screenshot per step, a pass/fail table, console/network facts | "looks good" with no evidence |
 | [ci-triage](https://github.com/Appit-labs/ci-triage) | Red CI → the failing step and the four lines that matter (GitHub Actions + GitLab) | reading 10k lines to find one error |
-| [pg-inspect](https://github.com/Appit-labs/pg-inspect) | Read-only Postgres inspection: tables, schema, SELECT, EXPLAIN, migrations, locks | retyping `psql` with credentials, one typo from a write |
+| [pg-inspect](https://github.com/Appit-labs/pg-inspect) | Read-only Postgres: overview, box tables with size bars, `ddl`, join graph, plan trees with cost bars, blocking tree, `--json` | retyping `psql` with credentials, one typo from a write |
 | [repo-runbook](https://github.com/Appit-labs/repo-runbook) | Writes the install/test/migrate runbook into `AGENTS.md`, and keeps it honest | forty tool calls re-discovering how to run the tests |
 | [remote-exec](https://github.com/Appit-labs/remote-exec) | One-shot SSH with hard timeouts, host aliases and a single-call health probe | sessions hanging on a password prompt |
 | [trello-tickets](https://github.com/Appit-labs/trello-tickets) | Seven ticket types baked in: sections, checklist, labels, cover colour | half-filled cards and a template to copy by hand |
