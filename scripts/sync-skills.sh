@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 ORG="${ORG:-Appit-labs}"
 rm -rf skills && mkdir -p skills
-for repo in live-qa trello-tickets repo-runbook pg-inspect remote-exec cloud-browser ci-triage open-design blender-pipeline; do
+for repo in live-qa trello-tickets repo-runbook pg-inspect remote-exec cloud-browser ci-triage open-design blender-pipeline code-scan release hermes-setup; do
   tmp=$(mktemp -d)
   git clone --depth 1 --quiet "git@github.com:$ORG/$repo.git" "$tmp/$repo"
   cp -r "$tmp/$repo/skills/$repo" "skills/$repo"
