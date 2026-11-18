@@ -11,7 +11,7 @@
       "name": "live-qa",
       "source": {
         "source": "github",
-        "repo": "appit-labs/live-qa"
+        "repo": "ibrahimbdr/live-qa"
       },
       "description": "Step-by-step live QA in a real browser: numbered screenshot per step, pass/fail table, console/network/a11y evidence.",
       "category": "engineering",
@@ -26,7 +26,7 @@
       "name": "trello-tickets",
       "source": {
         "source": "github",
-        "repo": "appit-labs/trello-tickets"
+        "repo": "ibrahimbdr/trello-tickets"
       },
       "description": "Create and read Trello cards from seven baked-in ticket types with sections, checklist, labels and cover color.",
       "category": "engineering",
@@ -40,7 +40,7 @@
       "name": "repo-runbook",
       "source": {
         "source": "github",
-        "repo": "appit-labs/repo-runbook"
+        "repo": "ibrahimbdr/repo-runbook"
       },
       "description": "Generate and keep a short verified runbook (install/run/test/migrate) in AGENTS.md so later sessions stop re-discovering it.",
       "category": "engineering",
@@ -54,7 +54,7 @@
       "name": "pg-inspect",
       "source": {
         "source": "github",
-        "repo": "appit-labs/pg-inspect"
+        "repo": "ibrahimbdr/pg-inspect"
       },
       "description": "Read-only Postgres inspection: tables, schema, SELECT, EXPLAIN, migrations, locks, sizes \u2014 safe against production.",
       "category": "engineering",
@@ -68,7 +68,7 @@
       "name": "remote-exec",
       "source": {
         "source": "github",
-        "repo": "appit-labs/remote-exec"
+        "repo": "ibrahimbdr/remote-exec"
       },
       "description": "One-shot SSH for agents: aliased hosts, hard timeouts, no password-prompt hangs, single-call host probe.",
       "category": "engineering",
@@ -82,7 +82,7 @@
       "name": "cloud-browser",
       "source": {
         "source": "github",
-        "repo": "appit-labs/cloud-browser"
+        "repo": "ibrahimbdr/cloud-browser"
       },
       "description": "Hosted/stealth cloud browser sessions through agent-browser providers, plus the sweep that stops orphaned browsers.",
       "category": "engineering",
@@ -96,7 +96,7 @@
       "name": "ci-triage",
       "source": {
         "source": "github",
-        "repo": "appit-labs/ci-triage"
+        "repo": "ibrahimbdr/ci-triage"
       },
       "description": "One command from \"CI is red\" to the failing step and the extracted error, for GitHub Actions and GitLab CI.",
       "category": "engineering",
@@ -110,7 +110,7 @@
       "name": "open-design",
       "source": {
         "source": "github",
-        "repo": "appit-labs/open-design"
+        "repo": "ibrahimbdr/open-design"
       },
       "description": "Work in the OpenDesign monorepo: pinned pnpm, tools-dev lifecycle, desktop/browser QA, pre-PR checks.",
       "category": "engineering",
@@ -124,7 +124,7 @@
       "name": "blender-pipeline",
       "source": {
         "source": "github",
-        "repo": "appit-labs/blender-pipeline"
+        "repo": "ibrahimbdr/blender-pipeline"
       },
       "description": "Blockout to shade to light to export in Blender via MCP, with eight specialist playbooks behind one router.",
       "category": "engineering",

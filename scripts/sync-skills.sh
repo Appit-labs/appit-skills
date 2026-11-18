@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Copy each published skill into ./skills for the npm package (@appit-labs/skills).
+# Copy each published skill into ./skills for the npm package (appit-skills).
 # Single source of truth stays in the per-skill repositories.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-ORG="${ORG:-appit-labs}"
+ORG="${ORG:-ibrahimbdr}"
 rm -rf skills && mkdir -p skills
 for repo in live-qa trello-tickets repo-runbook pg-inspect remote-exec cloud-browser ci-triage open-design blender-pipeline; do
   tmp=$(mktemp -d)
