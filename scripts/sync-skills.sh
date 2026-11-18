@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copy each published skill into ./skills for the npm package (@appit-ai/skills).
+# Copy each published skill into ./skills for the npm package (@appit-labs/skills).
 # Single source of truth stays in the per-skill repositories.
 set -euo pipefail
 cd "$(dirname "$0")/.."
