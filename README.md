@@ -6,6 +6,8 @@ CI triage, Blender. One marketplace, nine skills, no runtime dependencies.
 Every skill is plain `SKILL.md` plus (where useful) a single stdlib script, so it works in any agent
 that reads the open Agent Skills format: **pi, Claude Code, Codex, Cursor, Gemini CLI, Copilot, Goose**.
 
+![live-qa driving a real browser](assets/live-qa-demo.gif)
+
 ## Install
 
 **Claude Code** — the whole collection as a marketplace:
@@ -26,6 +28,21 @@ pi install npm:@ibrahimbdr/skills
 ```bash
 git clone git@github.com:ibrahimbdr/live-qa.git
 cp -r live-qa/skills/live-qa ~/.codex/skills/          # or ~/.claude/skills/, or .cursor/skills/
+```
+
+Verified end to end, not asserted:
+
+```
+$ claude plugin marketplace add ibrahimbdr/appit-skills
+✔ Successfully added marketplace: appit-skills
+$ claude plugin install live-qa@appit-skills
+✔ Successfully installed plugin: live-qa@appit-skills
+$ claude plugin details live-qa@appit-skills
+  Skills (1)  live-qa      Always-on: ~110 tok   On-invoke: ~2k
+```
+
+```
+$ npx skills add ibrahimbdr/live-qa     # installs into .claude/skills, .agents/skills and agent/skills
 ```
 
 ## The skills
@@ -53,6 +70,19 @@ cp -r live-qa/skills/live-qa ~/.codex/skills/          # or ~/.claude/skills/, o
   a network destination at runtime.
 - **Verified end to end.** Scripts ship `--self-test`; the commands were run against real targets
   (a live Postgres, a staging server, a failing CI run, Blender through MCP).
+
+## Cost
+
+Every skill's description is injected into every session, so it is kept short on purpose:
+
+| | always-on | on invoke |
+| --- | --- | --- |
+| `live-qa` | ~110 tok | ~2k |
+| `pg-inspect` | ~95 tok | ~0.7k |
+| `repo-runbook` | ~87 tok | ~0.9k |
+
+Detail lives in each skill's `references/` and is read only when needed. Installing the whole
+collection costs about 830 tokens of session overhead in total.
 
 ## License
 

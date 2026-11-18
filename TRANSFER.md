@@ -2,6 +2,11 @@
 
 Checked 2026-11-18.
 
+> **Current state:** the org does not exist yet, so the repos are **public under `ibrahimbdr`** and
+> the catalog points there — everything in `LAUNCH.md` works today. When you create `appit-labs`,
+> run `scripts/migrate-to-org.sh --yes` and it transfers the repos, rewrites every `ibrahimbdr/`
+> reference (README, `plugin.json`, `package.json`, marketplace sources) and pushes.
+
 | Question | Answer |
 | --- | --- |
 | Can an organisation be created for free? | **Yes.** GitHub Free for organizations costs $0: unlimited public and private repos, unlimited collaborators, 500 MB Actions storage, and **$12 of included compute usage per month** (Actions on private repos draws on that credit; Actions on public repos is free). |
