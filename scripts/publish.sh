@@ -15,8 +15,22 @@ say() { printf '%s\n' "$*"; }
 fail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
 
 say "== preflight"
-npm whoami >/dev/null 2>&1 || fail "not logged in: run 'npm login' first (2FA needed for publish)"
-say "  npm user:   $(npm whoami)"
+NPMRC=""
+cleanup() { [ -n "$NPMRC" ] && rm -f "$NPMRC"; }
+trap cleanup EXIT
+if [ -n "${NPM_TOKEN:-}" ]; then
+  # Token path: no browser, no bot check. Written 0600 and deleted on exit.
+  NPMRC=$(mktemp)
+  chmod 600 "$NPMRC"
+  printf '//registry.npmjs.org/:_authToken=%s\n' "$NPM_TOKEN" > "$NPMRC"
+  export NPM_CONFIG_USERCONFIG="$NPMRC"
+  say "  auth:       \$NPM_TOKEN (temporary config, deleted on exit)"
+else
+  npm whoami >/dev/null 2>&1 || fail "not logged in. Either:
+  - npm login --auth-type=legacy     (no browser; asks user/password/OTP)
+  - or create a granular token at npmjs.com and export NPM_TOKEN=…"
+fi
+say "  npm user:   $(npm whoami 2>/dev/null || echo '(token)')"
 node -e 'const p=require("./package.json"); if(!p.name||!p.version) process.exit(1); console.log("  package:    "+p.name+"@"+p.version)'
 node -e 'const p=require("./package.json"); if(!(p.keywords||[]).includes("pi-package")) process.exit(1); console.log("  gallery:    pi-package keyword present")'
 [ -f .claude-plugin/marketplace.json ] || fail "marketplace.json missing"
