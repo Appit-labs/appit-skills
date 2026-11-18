@@ -8,24 +8,19 @@ State on 2026-11-18 (verified, not assumed):
 | Org profile | `.github` renders the org landing page, transparent wordmark, avatar ready to upload |
 | Claude Code install | `claude plugin marketplace add Appit-labs/appit-skills` → install → *Skills (1)* — tested |
 | Any-agent install | `npx skills add Appit-labs/live-qa` installs into `.claude/skills`, `.agents/skills` — tested |
-| npm package | `npm pack` builds a 4.2 MB tarball with **all 12 skills**; `publish.sh --dry-run` green until auth |
-| Blocked on you | `npm login` (publish), org avatar upload (no API), paid Claude plan (Anthropic directory) |
+| npm | **published**: `@appitlabs/skills@0.1.0`, 12 skills, 5.7 MB, public — `npm i @appitlabs/skills` verified in a clean dir |
+| pi gallery | live: [pi.dev/packages/@appitlabs/skills](https://pi.dev/packages/@appitlabs/skills) |
+| Org avatar | **live** — full Appit wordmark, 512², 99.8% pixel match to the committed file |
+| npm download counter | [`api.npmjs.org/downloads/point`](https://api.npmjs.org/downloads/point/last-week/@appitlabs/skills) — empty until npm's daily rollup picks the package up (≤24 h) |
+| Blocked on you | the first post, the Anthropic directory (paid plan), and consent for the awesome-list PR |
 
 ## Remaining steps, in order
 
-### 1. npm publish — one command, unlocks the gallery
+### 1. ~~npm publish~~ — done
 
-```bash
-cd work/appit-skills
-bash scripts/publish.sh          # preflight: auth, keyword, marketplace validation, 12 skills in the tarball
-```
-
-That puts all twelve in **[pi.dev/packages](https://pi.dev/packages)**, which indexes npm by the
-`pi-package` keyword. It is the only channel with a public download counter, so it is also the
-only honest way to answer "how many people use this".
-
-Trim first if 4.2 MB feels heavy: drop `assets` from `package.json#files` and the demos stop
-shipping with the npm package (they still show on GitHub).
+`@appitlabs/skills@0.1.0` is on the registry and in the pi gallery. The only follow-up is the
+optional diet: `assets` out of `files` and publish `0.1.1` (~1 MB instead of 5.7 MB). Do that
+before the first post if you want the lean package, not after people have installed 0.1.0.
 
 ### 2. Get past the two-star floor
 

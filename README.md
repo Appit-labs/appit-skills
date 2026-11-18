@@ -17,6 +17,13 @@ that reads the open Agent Skills format: **pi, Claude Code, Codex, Cursor, Gemin
 
 ![live-qa driving a real browser](assets/hero-live-qa.gif)
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@appitlabs/skills"><img alt="npm" src="https://img.shields.io/npm/v/@appitlabs/skills?style=flat-square&color=CB3837"></a>
+  <a href="https://www.npmjs.com/package/@appitlabs/skills"><img alt="downloads" src="https://img.shields.io/npm/dm/@appitlabs/skills?style=flat-square"></a>
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-3DA639?style=flat-square">
+  <img alt="skills" src="https://img.shields.io/badge/skills-12-2EA043?style=flat-square">
+</p>
+
 ## Install
 
 **Claude Code** — the whole collection as a marketplace:
