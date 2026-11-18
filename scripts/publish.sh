@@ -10,6 +10,11 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 DRY=""
 [ "${1:-}" = "--dry-run" ] && DRY="--dry-run"
+# 2FA is enabled on the publishing account (auth-and-writes), so npm asks for a one-time
+# password. Pass it as $NPM_OTP and it goes to npm as --otp; an automation token
+# ($NPM_TOKEN) bypasses the prompt entirely and is the right choice for repeat releases.
+OTP_ARG=""
+[ -n "${NPM_OTP:-}" ] && OTP_ARG="--otp=$NPM_OTP"
 
 say() { printf '%s\n' "$*"; }
 fail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
@@ -28,7 +33,8 @@ if [ -n "${NPM_TOKEN:-}" ]; then
 else
   npm whoami >/dev/null 2>&1 || fail "not logged in. Either:
   - npm login --auth-type=legacy     (no browser; asks user/password/OTP)
-  - or create a granular token at npmjs.com and export NPM_TOKEN=…"
+  - export NPM_OTP=<6-digit code from the authenticator>   (2FA is auth-and-writes)
+  - or export NPM_TOKEN=<automation token>                 (bypasses the OTP prompt)"
 fi
 say "  npm user:   $(npm whoami 2>/dev/null || echo '(token)')"
 node -e 'const p=require("./package.json"); if(!p.name||!p.version) process.exit(1); console.log("  package:    "+p.name+"@"+p.version)'
@@ -38,8 +44,7 @@ claude plugin validate .claude-plugin/marketplace.json --strict >/dev/null 2>&1 
   && say "  marketplace: validates" || fail "marketplace.json does not validate"
 
 say "== pack"
-npm pack --silent >/dev/null
-TARBALL=$(ls -t appit-skills-*.tgz | head -1)
+TARBALL=$(npm pack --silent | tail -1)
 COUNT=$(tar -tzf "$TARBALL" | grep -c '/SKILL.md$')
 say "  $TARBALL  ($(du -h "$TARBALL" | cut -f1), $COUNT skills)"
 [ "$COUNT" -ge 12 ] || fail "only $COUNT skills in the tarball — run scripts/sync-skills.sh"
@@ -47,10 +52,10 @@ say "  skills:     $(tar -tzf "$TARBALL" | grep '/SKILL.md$' | sed 's|package/sk
 
 say "== publish"
 if [ -n "$DRY" ]; then
-  npm publish --access public --dry-run
+  npm publish --access public $OTP_ARG --dry-run
   say "dry run: nothing uploaded"
 else
-  npm publish --access public
+  npm publish --access public $OTP_ARG
   say "published — the pi gallery indexes npm by the 'pi-package' keyword within minutes"
   say "next: git tag v$(node -p 'require("./package.json").version') && git push --tags"
 fi

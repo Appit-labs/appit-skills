@@ -29,7 +29,7 @@ claude plugin install live-qa@appit-skills
 **pi** — one package, twelve skills:
 
 ```bash
-pi install npm:@Appit-labs/skills
+pi install npm:@appitlabs/skills
 ```
 
 **Codex / Cursor / anything else** — clone and copy the skill you want:

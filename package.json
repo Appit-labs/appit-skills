@@ -1,5 +1,5 @@
 {
-  "name": "appit-skills",
+  "name": "@appitlabs/skills",
   "version": "0.1.0",
   "description": "Practical agent skills for real engineering work: browser QA, tickets, databases, remote boxes, CI triage, Blender.",
   "license": "MIT",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Appit-labs/appit-skills.git"
+    "url": "git+https://github.com/Appit-labs/appit-skills.git"
   },
   "pi": {
     "skills": [
@@ -33,5 +33,15 @@
   "author": {
     "name": "Appit Labs",
     "url": "https://github.com/Appit-labs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/Appit-labs/appit-skills#readme",
+  "bugs": {
+    "url": "https://github.com/Appit-labs/appit-skills/issues"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
