@@ -89,7 +89,9 @@ jobs:
           ver=$(node -p 'require("./package.json").version")
           base="https://registry.npmjs.org/${pkg}/-/$(echo "$pkg" | sed 's|.*/||')-${ver}.tgz"
           for i in $(seq 1 40); do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "$base")
+            # curl returns non-zero on DNS/connect failure; `set -e` would turn a
+            # replication lag into an instant red run instead of a patient wait.
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$base" || echo 000)
             if [ "$code" = "200" ]; then echo "tarball serves (${i}x30s)"; exit 0; fi
             sleep 30
           done

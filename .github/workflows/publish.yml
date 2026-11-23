@@ -58,7 +58,7 @@ jobs:
           ver=$(node -p 'require("./package.json").version')
           url="https://registry.npmjs.org/@appitlabs/skills/-/skills-${ver}.tgz"
           for i in $(seq 1 40); do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo 000)
             if [ "$code" = "200" ]; then echo "tarball serves (${i}x30s)"; exit 0; fi
             echo "attempt $i: $code"; sleep 30
           done
