@@ -25,6 +25,23 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org
 
+      # A tag created in a stale clone points at an older commit: it shipped 0.1.0
+      # through a workflow that still cloned skill repos over ssh, and failed at
+      # prepack. Refuse to publish when the tag and the manifest disagree.
+      - name: Tag must match the manifest
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          want="v$(node -p 'require("./package.json").version')"
+          got="${GITHUB_REF#refs/tags/}"
+          if [ "$want" != "$got" ]; then
+            echo "tag $got does not match package.json $want — retag the commit you mean"
+            exit 1
+          fi
+
+      - name: The mirror must be present
+        run: test "$(find skills -name SKILL.md | wc -l)" -ge 12 || {
+          echo "skills/ mirror is missing or incomplete"; exit 1; }
+
       - name: Publish with provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
