@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write      # required for provenance (OIDC)
+  id-token: write      # trusted publishing + provenance (OIDC)
 
 jobs:
   publish:
@@ -22,8 +22,14 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org
+
+      # Trusted publishing needs npm >= 11.5.1. With a trusted publisher configured
+      # for this package, NODE_AUTH_TOKEN is ignored and OIDC is used instead; it
+      # stays only as the fallback until `npm trust github` has been run once.
+      - name: npm new enough for OIDC
+        run: npm install -g npm@latest && npm --version
 
       # A tag created in a stale clone points at an older commit: it shipped 0.1.0
       # through a workflow that still cloned skill repos over ssh, and failed at

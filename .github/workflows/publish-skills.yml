@@ -10,16 +10,17 @@ name: publish-skills
 #
 #   gh workflow run publish-skills -R Appit-labs/appit-skills
 #
-# Provenance and this workflow are mutually exclusive: npm verifies that the repo the
-# bundle was built in matches package.json repository.url, and these are built here but
-# declare their own repositories (E422 otherwise). Provenance for a per-skill package
-# therefore needs a small reusable workflow *in that skill's repo*, which needs
-# NPM_TOKEN to exist there too. The one-time fix is an organisation secret:
+# BOOTSTRAP ONLY. Provenance and this workflow are mutually exclusive: npm verifies
+# that the bundle was built in the repository package.json claims, and these are built
+# here while declaring their own repositories (E422). Provenance therefore requires the
+# publish to run inside each skill repo, which is what .github/workflows/publish.yml
+# does there — with OIDC, so no token exists anywhere:
 #
-#   gh secret set NPM_TOKEN --org Appit-labs --visibility all
+#   npm trust github @appitlabs/<skill> --file publish.yml \
+#     --repository Appit-labs/<skill> --allow-publish -y
 #
-# then call `.github/workflows/publish-skill-reusable.yml` from each repo. Until that
-# exists, this publishes without provenance — a working package beats a missing one.
+# This matrix keeps one job: creating a package that does not exist yet, because
+# `npm trust` requires the package to exist first. Once trusted, stop using it.
 on:
   workflow_dispatch:
   push:
