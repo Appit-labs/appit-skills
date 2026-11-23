@@ -7,8 +7,8 @@ State on 2026-11-18 (verified, not assumed):
 | Public repos | 13 under [Appit-labs](https://github.com/Appit-labs): 12 skills + this catalog |
 | Org profile | `.github` renders the org landing page, transparent wordmark, avatar ready to upload |
 | Claude Code install | `claude plugin marketplace add Appit-labs/appit-skills` → install → *Skills (1)* — tested |
-| Any-agent install | `npx skills add Appit-labs/live-qa` installs into `.claude/skills`, `.agents/skills` — tested |
-| npm | **published**: `@appitlabs/skills@0.1.0`, 12 skills, 5.7 MB, public — `npm i @appitlabs/skills` verified in a clean dir |
+| Any-agent install | `npx skills add Appit-labs/appit-skills` → **12 skills**, tested in a clean dir and by CI (`.github/workflows/distribution.yml`) |
+| npm | **0.2.0 committed, publish blocked** — needs `NPM_TOKEN` in repo secrets, then `git tag v0.2.0 && git push --tags`. Package is now 2.7 MB unpacked (was 5.7) with the duplicate demo GIFs stripped |
 | pi gallery | live: [pi.dev/packages/@appitlabs/skills](https://pi.dev/packages/@appitlabs/skills) |
 | Org avatar | **live** — full Appit wordmark, 512², 99.8% pixel match to the committed file |
 | npm download counter | [`api.npmjs.org/downloads/point`](https://api.npmjs.org/downloads/point/last-week/@appitlabs/skills) — empty until npm's daily rollup picks the package up (≤24 h) |
@@ -84,6 +84,8 @@ cross-post it to another publication, so the two do not compete in search.
 
 ### 5. Listings that need a human
 
+Copy for every channel is in [`launch/SUBMIT.md`](launch/SUBMIT.md), in send order.
+
 | Where | Requirement | Effort |
 | --- | --- | --- |
 | [Anthropic plugin directory](https://claude.ai/directory/manage) | paid Claude plan; README ≥ 40 words and a licence (both already there) | 20 min |
@@ -95,8 +97,8 @@ cross-post it to another publication, so the two do not compete in search.
 - Do not post twelve repos in one go. Nine-at-once reads as spam; one sharp finding reads as expertise.
 - Do not claim numbers you have not run. Every figure in these READMEs came from a session log or a
   test in the repo.
-- Do not add a skill without a demo. Three of twelve still have no GIF (`code-scan`, `release`,
-  `hermes-setup` — built after the demo pass); they will convert worse until they have one.
+- ~~Do not add a skill without a demo~~ — audited 2026-11-23: all twelve ship `assets/demo.gif`.
+  Keep that true; `scripts/make_demo.py` regenerates any of them from `demos/<skill>.json`.
 
 ## The one thing that decides whether this works
 
