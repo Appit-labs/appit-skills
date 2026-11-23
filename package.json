@@ -1,7 +1,7 @@
 {
   "name": "@appitlabs/skills",
-  "version": "0.2.1",
-  "description": "Practical agent skills for real engineering work: browser QA, tickets, databases, remote boxes, CI triage, Blender.",
+  "version": "0.2.2",
+  "description": "Practical agent skills for real engineering work: browser QA, tickets, databases, remote boxes, CI triage, Blender. Twelve MIT skills, also published one by one as @appitlabs/<skill>.",
   "license": "MIT",
   "keywords": [
     "pi-package",
