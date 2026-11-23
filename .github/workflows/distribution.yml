@@ -1,0 +1,67 @@
+name: distribution
+
+# The funnel and the scoreboard, checked without a human remembering to.
+#
+# smoke  — a stranger's install command must still land twelve skills. The first
+#          release shipped no SKILL.md, so this was broken for every reader and
+#          nothing in the repo noticed.
+# radar  — a weekly record of where the collection ranks for the queries users type.
+#          Ranking is by installs; the table is how "is this working" stops being an
+#          opinion. It is committed, so the diff is the history.
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # Mondays, 06:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "scripts/distribute.py"
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  funnel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Does `npx skills add` still install all twelve?
+        run: python3 scripts/distribute.py smoke
+
+      - name: Refresh the radar
+        run: python3 scripts/distribute.py radar
+
+      - name: Commit the radar
+        run: |
+          if git diff --quiet -- distribution/radar.md; then
+            echo "radar unchanged"; exit 0
+          fi
+          git config user.name  "appit-radar"
+          git config user.email "radar@appit-labs.invalid"
+          git add distribution/radar.md
+          git commit -m "chore(radar): weekly position for the twelve tracked queries"
+          git push
+
+      - name: Open an issue when the funnel breaks
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "distribution: `npx skills add Appit-labs/appit-skills` no longer installs twelve skills";
+            const { data: open } = await github.rest.issues.listForRepo({
+              ...context.repo, state: "open", labels: "distribution",
+            });
+            if (open.some(i => i.title === title)) return;
+            await github.rest.issues.create({
+              ...context.repo, title, labels: ["distribution"],
+              body: "The smoke step in `.github/workflows/distribution.yml` failed.\n\n" +
+                    "This is the install path the README advertises, so every reader is hitting it. " +
+                    "Run `python3 scripts/distribute.py smoke` locally for the detail, then " +
+                    "`python3 scripts/distribute.py index` if the fix changes the source path.",
+            });

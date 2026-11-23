@@ -130,6 +130,27 @@ compatible with the MIT playbooks bundled in `blender-pipeline`.
 playbooks by arjun988 under their MIT terms — see its `NOTICE`. If a future skill bundles
 Apache-2.0 code, that skill will carry its own `NOTICE` and say so in its README.
 
+## Staying discoverable
+
+Discovery here is not marketing, it is plumbing, and it is checked by a script rather than
+remembered:
+
+```bash
+python3 scripts/distribute.py smoke   # does `npx skills add` still install all twelve?
+python3 scripts/distribute.py index   # register this source in the skills.sh index
+python3 scripts/distribute.py radar   # where do we rank for the queries users actually type?
+```
+
+`.github/workflows/distribution.yml` runs the smoke test and refreshes
+[`distribution/radar.md`](distribution/radar.md) every Monday, and opens an issue if the install
+path breaks. The radar is a committed table of the twelve tracked queries, who currently owns each
+one, and our position — so "is this working" is a diff, not an opinion. Ranking on
+[skills.sh](https://skills.sh) is by installs, and that index is fed by install telemetry, not by
+crawling GitHub: a source is invisible until someone installs it.
+
+`launch/SUBMIT.md` holds the ready-to-send copy for Hacker News, Reddit, dev.to and the two
+awesome-lists, in the order that works.
+
 ## Write-ups
 
 - **Your Cloudflare Turnstile may never be issuing a token** — [dev.to](https://dev.to/ibrahimbdr/your-cloudflare-turnstile-may-never-be-issuing-a-token-here-is-the-one-liner-that-tells-you-4h75) ·

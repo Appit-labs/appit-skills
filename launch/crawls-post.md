@@ -29,8 +29,8 @@ What actually fixed each one, as three small MIT skills:
   over 70%, memory, containers, GPU and listening ports in one call. A dead host costs your timeout,
   not your session.
 
-Collection: github.com/Appit-labs/appit-skills (twelve skills, MIT, one `claude plugin marketplace add`
-or `npx skills add` per skill). Each repo states its own token cost, because that is the objection
+Collection: github.com/Appit-labs/appit-skills — twelve MIT skills, `npx skills add Appit-labs/appit-skills`
+installs all of them. Each repo states its own token cost, because that is the objection
 worth answering up front.
 
 The general lesson, if you take only one thing: **your agent's biggest cost is not thinking, it is
