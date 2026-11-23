@@ -9,6 +9,17 @@ name: publish-skills
 # `pi install` will point at from now on.
 #
 #   gh workflow run publish-skills -R Appit-labs/appit-skills
+#
+# Provenance and this workflow are mutually exclusive: npm verifies that the repo the
+# bundle was built in matches package.json repository.url, and these are built here but
+# declare their own repositories (E422 otherwise). Provenance for a per-skill package
+# therefore needs a small reusable workflow *in that skill's repo*, which needs
+# NPM_TOKEN to exist there too. The one-time fix is an organisation secret:
+#
+#   gh secret set NPM_TOKEN --org Appit-labs --visibility all
+#
+# then call `.github/workflows/publish-skill-reusable.yml` from each repo. Until that
+# exists, this publishes without provenance — a working package beats a missing one.
 on:
   workflow_dispatch:
   push:
@@ -16,7 +27,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write   # provenance (OIDC)
 
 jobs:
   publish:
@@ -70,7 +80,7 @@ jobs:
         working-directory: skill
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public --provenance
+        run: npm publish --access public
 
       - name: The tarball must actually serve
         working-directory: skill
