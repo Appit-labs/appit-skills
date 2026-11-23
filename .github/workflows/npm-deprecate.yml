@@ -1,0 +1,55 @@
+name: npm-deprecate
+
+# 0.2.0 published its metadata and then served a 404 for the tarball for ~15 minutes.
+# It works now, so it is not broken — but 0.2.1 is the version that was verified, and
+# two installable versions of the same thing is a choice someone will get wrong.
+#
+# Deprecating is the only correct action on a published version: it prints a warning
+# to anyone installing it and leaves the artefact alone. Deleting is not an option and
+# unpublishing is abuse of the registry.
+#
+#   gh workflow run npm-deprecate -R Appit-labs/appit-skills \
+#     -f version=0.2.0 -f message="superseded by 0.2.1"
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package name
+        default: "@appitlabs/skills"
+        required: true
+      version:
+        description: Exact version to deprecate
+        required: true
+      message:
+        description: Message shown to anyone installing it
+        default: "superseded — install the latest"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Refuse to deprecate `latest`
+        run: |
+          latest=$(npm view "${{ inputs.package }}" dist-tags.latest)
+          if [ "$latest" = "${{ inputs.version }}" ]; then
+            echo "${{ inputs.version }} is the current latest — deprecating it deprecates the package"
+            exit 1
+          fi
+          echo "ok: latest is $latest, deprecating ${{ inputs.version }}"
+
+      - name: Deprecate
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm deprecate "${{ inputs.package }}@${{ inputs.version }}" "${{ inputs.message }}"
+
+      - name: Confirm
+        run: npm view "${{ inputs.package }}@${{ inputs.version }}" deprecated

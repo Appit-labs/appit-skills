@@ -49,5 +49,23 @@ jobs:
         run: |
           npm publish --access public --provenance
 
+      # 0.2.0 served a 404 on its tarball for ~15 minutes after a successful publish.
+      # npm's own CLI reports success as soon as the metadata is accepted, so "published"
+      # and "installable" are different states. Wait for the one that matters, and say
+      # what to do if it never arrives.
+      - name: The tarball must actually serve
+        run: |
+          ver=$(node -p 'require("./package.json").version')
+          url="https://registry.npmjs.org/@appitlabs/skills/-/skills-${ver}.tgz"
+          for i in $(seq 1 40); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            if [ "$code" = "200" ]; then echo "tarball serves (${i}x30s)"; exit 0; fi
+            echo "attempt $i: $code"; sleep 30
+          done
+          echo "tarball never served: $url"
+          echo "This is npm replication lag, not a bad publish. Do NOT bump the version;"
+          echo "re-check in an hour and deprecate only if it never appears."
+          exit 1
+
       - name: Verify the attestation
         run: npm audit signatures || true

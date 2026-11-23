@@ -4,6 +4,7 @@
     python3 scripts/distribute.py smoke     # does `npx skills add` still install all twelve?
     python3 scripts/distribute.py index     # put this source into the skills.sh index
     python3 scripts/distribute.py radar     # where do we rank for the queries people actually type?
+    python3 scripts/distribute.py index-check   # are we in the index yet, and since when?
     python3 scripts/distribute.py all
 
 Why three commands and not one:
@@ -36,6 +37,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SOURCE = "Appit-labs/appit-skills"
 API = "https://skills.sh/api/search"
 OUT = ROOT / "distribution" / "radar.md"
+STATE = ROOT / "distribution" / "index-state.json"
 
 # The query a user actually types, per skill. Keep these in the user's words, not ours.
 QUERIES = {
@@ -125,6 +127,67 @@ def cmd_radar() -> int:
     return 0  # not indexed yet is a fact to report, not a failure to block on
 
 
+FALLBACK_DAYS = 7
+
+
+def _load_state() -> dict:
+    if STATE.exists():
+        return json.loads(STATE.read_text())
+    return {}
+
+
+def cmd_index_check(fallback_days: int = FALLBACK_DAYS, register: bool = True) -> int:
+    """Measure the lag instead of predicting it.
+
+    skills.sh search is fed by install telemetry, so "we are registered" is an
+    observation, not a claim. Each check records the first date a skill was seen in
+    the index; the difference between that date and the publish date *is* the lag.
+
+    If a skill is still invisible after `fallback_days`, register its own repository
+    as a second source. That is one honest install of a different source, not a
+    repeated install of the same one — and it is the fallback, not the plan.
+    """
+    state = _load_state()
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    fresh, stale = [], []
+
+    for skill in QUERIES:
+        hits = search(skill, owner="Appit-labs")
+        seen = bool(hits)
+        rec = state.setdefault(skill, {})
+        rec["checked_at"] = now
+        rec["indexed"] = seen
+        rec["installs"] = sum(h.get("installs", 0) for h in hits)
+        if seen:
+            rec.setdefault("first_seen", today)
+            fresh.append(skill)
+        else:
+            rec.setdefault("first_checked", today)
+            stale.append(skill)
+        print(f"  {skill:<18} indexed={'yes' if seen else 'no ':<4} installs={rec['installs']}")
+
+    if register:
+        for skill in stale:
+            rec = state[skill]
+            if rec.get("fallback_at"):
+                continue
+            started = rec.get("first_checked", today)
+            age = (datetime.fromisoformat(today) - datetime.fromisoformat(started)).days
+            if age < fallback_days:
+                continue
+            print(f"  {skill}: invisible for {age}d — registering its own repository")
+            r = subprocess.run(["npx", "-y", "skills", "add", f"Appit-labs/{skill}", "-g", "-y"],
+                               capture_output=True, text=True, timeout=600)
+            if r.returncode == 0:
+                rec["fallback_at"] = now
+
+    STATE.write_text(json.dumps(dict(sorted(state.items())), indent=1) + "\n")
+    print(f"index-check: {len(fresh)}/{len(QUERIES)} indexed "
+          f"({len(stale)} pending, fallback after {fallback_days}d)")
+    return 0
+
+
 def main(argv: list[str]) -> int:
     cmd = argv[1] if len(argv) > 1 else "all"
     if cmd in ("smoke", "all"):
@@ -135,6 +198,9 @@ def main(argv: list[str]) -> int:
         cmd_index()
     if cmd in ("radar", "all"):
         return cmd_radar()
+    if cmd == "index-check":
+        days = int(argv[2]) if len(argv) > 2 else FALLBACK_DAYS
+        return cmd_index_check(days)
     return 0
 
 

@@ -1,0 +1,88 @@
+name: publish-skills
+
+# The twelve per-skill packages, published as @appitlabs/<skill>.
+#
+# Why they exist at all: four of these names are generic enough that someone else
+# already owns them on npm — `ci-triage`, `release`, `remote-exec`, `hermes-setup`
+# all return a stranger's package. Scoping does not fix what people type, but it
+# gives the README a name that can only be ours, and it is the name the docs and
+# `pi install` will point at from now on.
+#
+#   gh workflow run publish-skills -R Appit-labs/appit-skills
+on:
+  workflow_dispatch:
+  push:
+    tags: ["skills-v*"]
+
+permissions:
+  contents: read
+  id-token: write   # provenance (OIDC)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        skill:
+          - live-qa
+          - ci-triage
+          - pg-inspect
+          - repo-runbook
+          - remote-exec
+          - trello-tickets
+          - cloud-browser
+          - open-design
+          - blender-pipeline
+          - code-scan
+          - release
+          - hermes-setup
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: Appit-labs/${{ matrix.skill }}
+          path: skill
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      # The guard is here, at the only moment it matters: a new skill cannot be
+      # published under a name someone else may already own.
+      - name: Name must be scoped
+        working-directory: skill
+        run: |
+          name=$(node -p 'require("./package.json").name')
+          want="@appitlabs/${{ matrix.skill }}"
+          if [ "$name" != "$want" ]; then
+            echo "package.json name is $name, expected $want"
+            echo "unscoped names collide with unrelated packages on npm"
+            exit 1
+          fi
+
+      - name: Mirror must be present in this repository
+        working-directory: skill
+        run: test "$(find skills -name SKILL.md | wc -l)" -ge 1 || {
+          echo "skills/ mirror missing in Appit-labs/${{ matrix.skill }}"; exit 1; }
+
+      - name: Publish
+        working-directory: skill
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance
+
+      - name: The tarball must actually serve
+        working-directory: skill
+        run: |
+          pkg=$(node -p 'require("./package.json").name')
+          ver=$(node -p 'require("./package.json").version")
+          base="https://registry.npmjs.org/${pkg}/-/$(echo "$pkg" | sed 's|.*/||')-${ver}.tgz"
+          for i in $(seq 1 40); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$base")
+            if [ "$code" = "200" ]; then echo "tarball serves (${i}x30s)"; exit 0; fi
+            sleep 30
+          done
+          echo "tarball never served: $base"
+          echo "npm replication lag is normal — re-check in an hour. Do not bump the version for this."
+          exit 1
