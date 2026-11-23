@@ -43,6 +43,17 @@ claude plugin marketplace add Appit-labs/appit-skills
 claude plugin install live-qa@appit-skills
 ```
 
+**npm** — one skill on its own, or the collection:
+
+```bash
+npm i @appitlabs/live-qa        # that one skill
+npm i @appitlabs/skills         # all twelve, as one pi package
+```
+
+> The unscoped names are taken: `npm i ci-triage`, `release`, `remote-exec` and
+> `hermes-setup` all install an unrelated package by someone else. Nothing published
+> from this organisation is unscoped, and `publish-skills` refuses an unscoped name.
+
 **pi** — one package, twelve skills:
 
 ```bash

@@ -8,7 +8,7 @@ State on 2026-11-18 (verified, not assumed):
 | Org profile | `.github` renders the org landing page, transparent wordmark, avatar ready to upload |
 | Claude Code install | `claude plugin marketplace add Appit-labs/appit-skills` → install → *Skills (1)* — tested |
 | Any-agent install | `npx skills add Appit-labs/appit-skills` → **12 skills**, tested in a clean dir and by CI (`.github/workflows/distribution.yml`) |
-| npm | **0.2.0 committed, publish blocked** — needs `NPM_TOKEN` in repo secrets, then `git tag v0.2.0 && git push --tags`. Package is now 2.7 MB unpacked (was 5.7) with the duplicate demo GIFs stripped |
+| npm | **published**: `@appitlabs/skills@0.2.1` (0.2.0 deprecated), plus all twelve as `@appitlabs/<skill>@0.1.2`. 2.7 MB unpacked, 15 keywords, provenance on the collection |
 | pi gallery | live: [pi.dev/packages/@appitlabs/skills](https://pi.dev/packages/@appitlabs/skills) |
 | Org avatar | **live** — full Appit wordmark, 512², 99.8% pixel match to the committed file |
 | npm download counter | [`api.npmjs.org/downloads/point`](https://api.npmjs.org/downloads/point/last-week/@appitlabs/skills) — empty until npm's daily rollup picks the package up (≤24 h) |
