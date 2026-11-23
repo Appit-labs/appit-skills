@@ -1,12 +1,24 @@
 {
   "name": "@appitlabs/skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Practical agent skills for real engineering work: browser QA, tickets, databases, remote boxes, CI triage, Blender.",
   "license": "MIT",
   "keywords": [
     "pi-package",
     "agent-skills",
-    "claude-code-plugin"
+    "claude-code-plugin",
+    "claude-skills",
+    "codex",
+    "cursor",
+    "agent-skills-cli",
+    "playwright",
+    "postgres",
+    "ssh",
+    "ci",
+    "trello",
+    "blender",
+    "qa",
+    "devops"
   ],
   "repository": {
     "type": "git",
@@ -19,15 +31,13 @@
   },
   "files": [
     "skills",
-    "demos",
-    "tools",
     "assets",
     "README.md",
     "LICENSE",
     "SECURITY.md"
   ],
   "scripts": {
-    "prepack": "bash scripts/sync-skills.sh",
+    "sync": "bash scripts/sync-skills.sh",
     "demo": "python3 scripts/make_demo.py"
   },
   "author": {

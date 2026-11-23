@@ -26,6 +26,16 @@ that reads the open Agent Skills format: **pi, Claude Code, Codex, Cursor, Gemin
 
 ## Install
 
+**Any agent — all twelve, via the skills CLI** (the path most people already use):
+
+```bash
+npx skills add Appit-labs/appit-skills -g -y   # -g = user level, -y = no prompts
+```
+
+This repository ships a generated `skills/` mirror of the twelve skill repositories, so the
+CLI finds them without cloning anything by hand. `scripts/sync-skills.sh` rebuilds the
+mirror; run it before a release and commit the result.
+
 **Claude Code** — the whole collection as a marketplace:
 
 ```bash
